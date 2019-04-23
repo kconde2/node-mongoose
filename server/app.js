@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 mongoose.connect('mongodb://mongo/', {
     user: process.env.MONGODB_USER,
@@ -40,6 +41,7 @@ const UserSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
     email: String,
+    password: String,
     dob: Date,
     termsAccepted: Boolean,
     termsAcceptedDate: Date
@@ -68,17 +70,22 @@ db.once('open', () => {
     // });
 
     // movie.save().then(() => console.log('done'));
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync("simple-mdb", salt);
 
-    const user = new User({
-        firstname: "Sidiki",
-        lastname: "Soumah",
-        email: "kmarques@gmail.com",
-        dob: new Date('1990-12-17T03:24:00'),
-        termsAccepted: true,
-        termsAcceptedDate: new Date()
-    });
+    // const user = new User({
+    //     firstname: "Kaba",
+    //     lastname: "CONDE",
+    //     email: "kabaconde@gmail.com",
+    //     password: hash,
+    //     dob: new Date('1994-12-17T03:24:00'),
+    //     termsAccepted: true,
+    //     termsAcceptedDate: new Date()
+    // });
 
-    user.save().then(() => console.log('user done'));
+    // user.save().then(() => console.log('user registered'));
+
+    User.find().then(data => console.log(data));
 
     // let movie = new Movie({
     //     title: 'Avengers 4',
