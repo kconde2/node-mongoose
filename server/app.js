@@ -40,7 +40,14 @@ const Movie = mongoose.model('Movie', MovieSchema);
 const UserSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
-    email: String,
+    email: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        unique: true,
+        required: 'Email address is required',
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    },
     password: String,
     dob: Date,
     termsAccepted: Boolean,
@@ -85,7 +92,14 @@ db.once('open', () => {
 
     // user.save().then(() => console.log('user registered'));
 
-    User.find().then(data => console.log(data));
+    //User.find().then(data => console.log(data));
+
+
+    User.findOne({'email': 'kabaconde@gmail.com'}).then(data => {
+        console.log(data)
+        console.log(`${data.password}`);
+        console.log(bcrypt.compareSync("simple-mdb", `${data.password}`));
+    });
 
     // let movie = new Movie({
     //     title: 'Avengers 4',
