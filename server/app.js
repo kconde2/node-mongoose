@@ -35,18 +35,50 @@ MovieSchema.post('save', function(movie) {
 
 const Movie = mongoose.model('Movie', MovieSchema);
 
+
+const UserSchema = new mongoose.Schema({
+    firstname: String,
+    lastname: String,
+    email: String,
+    dob: Date,
+    termsAccepted: Boolean,
+    termsAcceptedDate: Date
+});
+
+UserSchema.pre('save', function(next) {
+    console.log(`Saving ${this.firstname} ...`);
+    next();
+});
+
+UserSchema.post('save', function(user) {
+    console.log(`${user.firstname} ${user.lastname} saved.`);
+});
+
+const User = mongoose.model('User', UserSchema);
+
 const db = mongoose.connection;
 
 db.once('open', () => {
 
-    const movie = new Movie({
-        title: "Marry Poppins",
-        year: 2018,
-        createdAt: new Date(),
-        category: "SF"
+    // const movie = new Movie({
+    //     title: "Marry Poppins",
+    //     year: 2018,
+    //     createdAt: new Date(),
+    //     category: "SF"
+    // });
+
+    // movie.save().then(() => console.log('done'));
+
+    const user = new User({
+        firstname: "Sidiki",
+        lastname: "Soumah",
+        email: "kmarques@gmail.com",
+        dob: new Date('1990-12-17T03:24:00'),
+        termsAccepted: true,
+        termsAcceptedDate: new Date()
     });
 
-    movie.save().then(() => console.log('done'));
+    user.save().then(() => console.log('user done'));
 
     // let movie = new Movie({
     //     title: 'Avengers 4',
