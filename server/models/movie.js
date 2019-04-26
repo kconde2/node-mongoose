@@ -1,3 +1,6 @@
+const db = require('../lib/db');
+const mongoose = require('mongoose');
+
 const MovieSchema = new mongoose.Schema({
     title: String,
     createdAt: Date,
@@ -24,4 +27,4 @@ MovieSchema.post('save', function(movie) {
     console.log(`${movie.title} saved.`);
 });
 
-module.exports = mongoose.model('Movie', MovieSchema);
+module.exports = db.model('Movie', MovieSchema);
