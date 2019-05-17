@@ -14,7 +14,7 @@ router.post("/login", (req, res) => {
       res.status(201).send({ token });
     })
     .catch(error => {
-      res.status(400).send("Invalid token n");
+      res.status(400).send("Invalid token");
     });
 
   console.log("Login...");
