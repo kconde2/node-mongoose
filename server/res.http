@@ -22,3 +22,11 @@ Content-Type: application/json
     "email": "kabaconde15@gmail.com",
     "password": "kaba"
 }
+
+POST http://localhost:3000/kaba
+Content-Type: application/json
+
+{
+    "email": "kabaconde15@gmail.com",
+    "password": "kaba"
+}
