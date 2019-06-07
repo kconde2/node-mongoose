@@ -32,3 +32,11 @@ services:
     command: 'npm start'
     ports:
       - 127.0.0.1:3000:3000
+  client:
+    build: './docker/client'
+    volumes:
+      - './client:/home/node/app'
+    working_dir: '/home/node/app'
+    command: 'yarn start'
+    ports:
+      - 127.0.0.1:3001:3000
