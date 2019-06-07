@@ -11,12 +11,32 @@ class TodoList extends React.Component {
     const todo = { text };
 
     this.setState({
-        todos: [
-            ...this.state.todos,
-            todo,
-        ]
+      todos: [
+        ...this.state.todos,
+        todo,
+      ]
     });
   };
+
+  handleCheck = (todo) => {
+    this.setState({
+      todos: this.state.todos.map(item => {
+        if (todo.text === item.text) {
+          item.checked = !item.checked;
+        }
+
+        return item;
+      })
+    });
+  }
+
+  handleDelete = (todo) => {
+    this.setState({
+      todos: this.state.todos.filter(item => {
+        return todo.text !== item.text;
+      })
+    });
+  }
 
   render() {
     return (
@@ -24,7 +44,7 @@ class TodoList extends React.Component {
         <TodoForm onSubmit={this.handleNew}></TodoForm>
         <ul>
           {this.state.todos.map((todo, index) => (
-            <TodoItem key={index} todo={todo} />
+            <TodoItem key={index} onCheck={this.handleCheck}  onDelete={this.handleDelete} todo={todo} />
           ))}
         </ul>
       </React.Fragment>
