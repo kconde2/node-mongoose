@@ -1,14 +1,15 @@
 import React from "react";
 import TodoItemContainer from "./TodoItemContainer";
+import TodoContext from "../../../context/TodoContext";
 
-const TodoList = ({ todos }) =>
-  <React.Fragment>
-    {/* <TodoFormContainer /> */}
-    <ul>
-      {todos.map((todo, index) => (
+const TodoList = () => <TodoContext.Consumer>
+  {
+    (context) => <ul>
+      {context.todos.map((todo, index) => (
         <TodoItemContainer key={index} todo={todo} />
       ))}
     </ul>
-  </React.Fragment>
+  }
+</TodoContext.Consumer>
 
 export default TodoList;

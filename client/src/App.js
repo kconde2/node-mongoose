@@ -1,7 +1,8 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import TodoListContainer from './components/Todo/TodoListContainer';
+import TodoContext from '../context/TodoContext';
+import TodoList from './components/Todo/TodoList';
 
 function App() {
   return (
@@ -20,7 +21,10 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <TodoListContainer />
+
+      <TodoContext.Provider value={{ todos: [{ text: "todo 1" }, { text: "todo 2", checked: true }] }}>
+        <TodoList />
+      </TodoContext.Provider>
     </div>
   );
 }
