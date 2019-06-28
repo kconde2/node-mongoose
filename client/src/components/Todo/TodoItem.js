@@ -1,7 +1,11 @@
 import React from "react";
 import TodoItemActions from "./TodoItemActions";
+import TodoContext from "../../context/TodoContext";
 
 class TodoItem extends React.Component {
+
+  static contextType = TodoContext;
+
   render() {
     return (
       <li
@@ -9,9 +13,7 @@ class TodoItem extends React.Component {
       >
         {this.props.todo.text}
 
-        <TodoItemActions
-            onComplete={() => this.props.onCheck(this.props.todo)}
-            onDelete={() => this.props.onDelete(this.props.todo)} />
+        <TodoItemActions todo={this.props.todo} />
       </li>
     );
   }
